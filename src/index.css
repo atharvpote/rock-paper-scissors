@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    background: rgb(31, 55, 86);
+    background: radial-gradient(
+      circle at center top,
+      rgba(31, 55, 86, 1) 25%,
+      rgba(20, 21, 57, 1) 100%
+    );
+
+    @apply min-h-screen font-semibold text-white;
+  }
+}
+
+@layer utilities {
+  .score-text {
+    color: hsl(229, 64%, 46%);
+  }
+
+  .dark-text {
+    color: hsl(229, 25%, 31%);
+  }
+
+  .shadow-top {
+    box-shadow: 0 -4px 0 0 #ccceda;
+  }
+
+  .border-blue {
+    border-color: #4764f0;
+  }
+
+  .border-yellow {
+    border-color: #eba61d;
+  }
+
+  .border-red {
+    border-color: #d73250;
+  }
+
+  .box-shadow-blue {
+    box-shadow: 0 6px 0 0 #2743c0;
+  }
+
+  .box-shadow-yellow {
+    box-shadow: 0 6px 0 0 #c46c18;
+  }
+
+  .box-shadow-red {
+    box-shadow: 0 6px 0 0 #9a1736;
+  }
+}

@@ -1,3 +1,9 @@
+import Header from "./components/Header";
+
 export default function App() {
-  return <div>Rock, Paper and Scissors</div>;
+  return (
+    <main>
+      <Header />
+    </main>
+  );
 }

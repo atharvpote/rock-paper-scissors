@@ -3,16 +3,16 @@ import GlobalContext from "./GlobalContext";
 import initialState from "./initialState";
 import reducer from "./reducer";
 
-export default function GlobalContextProvider({
-  children,
-}: {
+export type Children = {
   children: React.ReactNode;
-}): JSX.Element {
+};
+
+export default function GlobalContextProvider(props: Children): JSX.Element {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <GlobalContext.Provider value={{ state, dispatch }}>
-      {children}
+      {props.children}
     </GlobalContext.Provider>
   );
 }

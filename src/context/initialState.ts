@@ -1,12 +1,17 @@
-export type Chip = "paper" | "scissors" | "rock";
+import { ButtonObject } from "../App";
+
 export type State = {
   currentPage: "start" | "result";
-  selectedChip: Chip | null;
+  userPick: ButtonObject | null;
+  housePick: ButtonObject | null;
+  score: number;
 };
 
 const initialState: State = {
   currentPage: "start",
-  selectedChip: null,
+  userPick: null,
+  housePick: null,
+  score: 0,
 };
 
 export default initialState;

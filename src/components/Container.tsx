@@ -1,11 +1,8 @@
 import { useContext } from "react";
 import GlobalContext, { ContextValue } from "../context/GlobalContext";
+import { Children } from "../context/GlobalContextProvider";
 
-export default function Container({
-  children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element {
+export default function Container(props: Children): JSX.Element {
   const { state } = useContext(GlobalContext) as ContextValue;
 
   return (
@@ -14,7 +11,7 @@ export default function Container({
         state.currentPage === "result" ? "adjust-to-height" : ""
       }`}
     >
-      {children}
+      {props.children}
     </div>
   );
 }

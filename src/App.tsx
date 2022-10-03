@@ -5,18 +5,17 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Result from "./components/Result";
 import Start from "./components/Start";
-import { Chip } from "./context/initialState";
-
 import paper from "./assets/icon-paper.svg";
 import scissors from "./assets/icon-scissors.svg";
 import rock from "./assets/icon-rock.svg";
 
+export type ButtonObject = {
+  name: "paper" | "scissors" | "rock";
+  icon: string;
+  styles: string;
+};
 export type Buttons = {
-  [key: string]: {
-    name: Chip;
-    icon: string;
-    styles: string;
-  };
+  [key: string]: ButtonObject;
 };
 
 export default function App(): JSX.Element {

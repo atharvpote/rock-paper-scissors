@@ -1,16 +1,16 @@
-import Button from "./Button";
-import triangle from "../assets/bg-triangle.svg";
 import { useContext } from "react";
 import GlobalContext, { ContextValue } from "../context/GlobalContext";
 import { Action } from "../context/reducer";
 import { Buttons } from "../App";
+import Button from "./Button";
+import triangle from "../assets/bg-triangle.svg";
 
 type StartProps = {
   buttons: Buttons;
 };
 type Position = { [k: string]: string };
 
-export default function Start({ buttons }: StartProps): JSX.Element {
+export default function Start(props: StartProps): JSX.Element {
   const { dispatch } = useContext(GlobalContext) as ContextValue;
 
   const position: Position = {
@@ -22,7 +22,7 @@ export default function Start({ buttons }: StartProps): JSX.Element {
   return (
     <div className="relative w-40 md:w-60">
       <img src={triangle} alt="" />
-      {mapButtons(buttons, position, dispatch)}
+      {mapButtons(props.buttons, position, dispatch)}
     </div>
   );
 }
@@ -44,8 +44,8 @@ function mapButtons(
         handleClick={(): void => {
           dispatch({ type: "switchToResult" });
           dispatch({
-            type: "selectChip",
-            payload: { value: buttons[key].name },
+            type: "userPick",
+            payload: { value: buttons[key] },
           });
         }}
       />

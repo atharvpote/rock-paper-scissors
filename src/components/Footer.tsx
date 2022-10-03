@@ -1,4 +1,4 @@
-export default function Footer() {
+export default function Footer(): JSX.Element {
   return (
     <div className="mx-auto max-w-6xl">
       <footer className="flex justify-center pb-8 md:mr-6 md:justify-end md:pb-6">

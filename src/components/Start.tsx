@@ -1,5 +1,4 @@
 import Button from "./Button";
-
 import triangle from "../assets/bg-triangle.svg";
 
 type StartProps = {
@@ -13,9 +12,9 @@ type StartProps = {
 
 export default function Start({ buttons }: StartProps): JSX.Element {
   const position: { [k: string]: string } = {
-    paper: "top-0 left-0 -translate-x-1/2 -translate-y-1/2",
-    scissors: "top-0 right-0 translate-x-1/2 -translate-y-1/2",
-    rock: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2",
+    paper: "absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2",
+    scissors: "absolute top-0 right-0 translate-x-1/2 -translate-y-1/2",
+    rock: "absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2",
   };
 
   return (

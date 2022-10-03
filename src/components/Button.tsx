@@ -10,7 +10,7 @@ export default function Button({
   position,
 }: ButtonProps): JSX.Element {
   return (
-    <div className={`absolute grid place-content-center ${position}`}>
+    <div className={`grid place-content-center ${position}`}>
       <button
         className={`rounded-full border-[16px] md:border-[20px] ${styles}`}
       >

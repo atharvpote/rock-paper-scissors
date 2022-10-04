@@ -16,18 +16,13 @@ export default function Result(props: ResultProps): JSX.Element {
   const [winner, setWinner] = useState<Result | null>(null);
 
   useEffect(() => {
-    setHouseChip(housePick(props.buttons));
+    const housePick = getHousePick(props.buttons);
+    const winner = result(props.userChip, housePick);
+
+    setHouseChip(housePick);
+    setWinner(winner);
+    props.setScore(getScore(winner, props.score));
   }, []);
-
-  useEffect(() => {
-    if (houseChip) setWinner(result(props.userChip, houseChip));
-  }, [houseChip]);
-
-  useEffect(() => {
-    if (winner === "user") props.setScore(props.score + 1);
-    if (winner === "house")
-      props.setScore(props.score <= 0 ? 0 : props.score - 1);
-  }, [winner]);
 
   return (
     <div className="flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:min-w-[40rem] md:items-center">
@@ -94,10 +89,18 @@ export default function Result(props: ResultProps): JSX.Element {
   );
 }
 
-function housePick(buttons: Buttons): ButtonObject {
+function getHousePick(buttons: Buttons): ButtonObject {
   return Object.values(buttons)[
     Math.floor(Math.random() * Object.keys(buttons).length)
   ];
+}
+
+function getScore(result: Result, score: number): number {
+  if (result === "tie") return score;
+
+  if (result === "user") return score + 1;
+
+  return score <= 0 ? 0 : score - 1;
 }
 
 function result(user: ButtonObject, house: ButtonObject): Result {

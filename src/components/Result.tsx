@@ -1,27 +1,31 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 
 type ResultProps = {
   buttons: Buttons;
-  userChip: ButtonObject;
+  userChip: ButtonObject | null;
   score: number;
   setScore: React.Dispatch<number>;
-  setPage: React.Dispatch<"start" | "result">;
 };
 type Result = "user" | "house" | "tie";
 
 export default function Result(props: ResultProps): JSX.Element {
   const [houseChip, setHouseChip] = useState<ButtonObject | null>(null);
   const [winner, setWinner] = useState<Result | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const housePick = getHousePick(props.buttons);
-    const winner = result(props.userChip, housePick);
+    if (!props.userChip) navigate("/");
+    else {
+      const housePick = getHousePick(props.buttons);
+      const winner = result(props.userChip, housePick);
 
-    setHouseChip(housePick);
-    setWinner(winner);
-    props.setScore(getScore(winner, props.score));
+      setHouseChip(housePick);
+      setWinner(winner);
+      props.setScore(getScore(winner, props.score));
+    }
   }, []);
 
   return (
@@ -76,14 +80,12 @@ export default function Result(props: ResultProps): JSX.Element {
               : "tie"}
           </p>
         </div>
-        <button
+        <Link
+          to="/"
           className="dark-text mx-auto block rounded-lg bg-white px-16 py-4 text-center uppercase tracking-widest md:py-3  md:px-10"
-          onClick={(): void => {
-            props.setPage("start");
-          }}
         >
           play again
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -41,7 +41,7 @@ function mapButtons(
         icon={buttons[key].icon}
         styles={buttons[key].styles}
         position={position[key]}
-        handleClick={(): void => {
+        clickHandler={(): void => {
           dispatch({ type: "switchToResult" });
           dispatch({
             type: "userPick",

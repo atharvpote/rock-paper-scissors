@@ -7,10 +7,9 @@ type ActionTypes =
   | "userPick"
   | "incrementScore"
   | "decrementScore";
-
 export type Action = {
   type: ActionTypes;
-  payload?: { value: string | ButtonObject | void };
+  payload?: { value: ButtonObject };
 };
 
 export default function reducer(state: State, action: Action): State {

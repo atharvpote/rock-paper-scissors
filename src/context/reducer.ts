@@ -5,9 +5,9 @@ type ActionTypes =
   | "switchToStart"
   | "switchToResult"
   | "userPick"
-  | "housePick"
   | "incrementScore"
   | "decrementScore";
+
 export type Action = {
   type: ActionTypes;
   payload?: { value: string | ButtonObject | void };
@@ -24,15 +24,11 @@ export default function reducer(state: State, action: Action): State {
     if (action.payload && typeof action.payload.value == "object")
       return { ...state, userPick: action.payload.value };
 
-  if (action.type === "housePick")
-    if (action.payload && typeof action.payload.value == "object")
-      return { ...state, housePick: action.payload.value };
-
   if (action.type === "incrementScore")
-    return { ...state, score: state.score++ };
+    return { ...state, score: state.score + 1 };
 
   if (action.type === "decrementScore")
-    return { ...state, score: state.score <= 0 ? 0 : state.score-- };
+    return { ...state, score: state.score <= 0 ? 0 : state.score - 1 };
 
   return state;
 }

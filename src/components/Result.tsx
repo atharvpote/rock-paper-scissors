@@ -1,5 +1,4 @@
-import { useContext, useEffect } from "react";
-import { State } from "../context/initialState";
+import { useContext, useEffect, useState } from "react";
 import GlobalContext, { ContextValue } from "../context/GlobalContext";
 import { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
@@ -7,24 +6,26 @@ import Button from "./Button";
 type ResultProps = {
   buttons: Buttons;
 };
+type Result = "user" | "house" | "tie";
 
 export default function Result(props: ResultProps): JSX.Element {
   const { state, dispatch } = useContext(GlobalContext) as ContextValue;
-  const decision = result(state);
+  const [houseChip, setHouseChip] = useState<ButtonObject | null>(null);
+  const [winner, setWinner] = useState<Result | null>(null);
 
   useEffect(() => {
-    dispatch({
-      type: "housePick",
-      payload: { value: housePick(props.buttons) },
-    });
+    setHouseChip(housePick(props.buttons));
   }, []);
 
   useEffect(() => {
-    if (decision === "tie") return;
+    if (state.userPick && houseChip)
+      setWinner(result(state.userPick, houseChip));
+  }, [houseChip]);
 
-    if (decision === "user") dispatch({ type: "incrementScore" });
-    else dispatch({ type: "decrementScore" });
-  }, [state.housePick]);
+  useEffect(() => {
+    if (winner === "user") dispatch({ type: "incrementScore" });
+    if (winner === "house") dispatch({ type: "decrementScore" });
+  }, [winner]);
 
   return (
     <div className="flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:min-w-[40rem] md:items-center">
@@ -33,7 +34,7 @@ export default function Result(props: ResultProps): JSX.Element {
       <div className="flex flex-col items-center gap-8 md:order-1">
         <div
           className={`grid h-28 w-28 place-content-center rounded-full bg-[#192845] md:order-1 md:h-36 md:w-36 ${
-            decision === "user" ? "winner-shadow" : ""
+            winner === "user" ? "winner-shadow" : ""
           }`}
         >
           {state.userPick && (
@@ -51,13 +52,13 @@ export default function Result(props: ResultProps): JSX.Element {
       <div className="flex flex-col items-center gap-8 md:order-3">
         <div
           className={`grid h-28 w-28 place-content-center rounded-full bg-[#192845] md:order-1 md:h-36 md:w-36 ${
-            decision === "house" ? "winner-shadow" : ""
+            winner === "house" ? "winner-shadow" : ""
           }`}
         >
-          {state.housePick && (
+          {houseChip && (
             <Button
-              icon={state.housePick.icon}
-              styles={state.housePick.styles}
+              icon={houseChip.icon}
+              styles={houseChip.styles}
               position=""
             />
           )}
@@ -71,9 +72,9 @@ export default function Result(props: ResultProps): JSX.Element {
         {/* <div className="md:0 basis-full md:order-2 md:basis-0 md:overflow-hidden"> */}
         <div className="mb-6">
           <p className="text-center text-6xl uppercase md:text-4xl">
-            {decision === "user"
+            {winner === "user"
               ? "you won"
-              : decision === "house"
+              : winner === "house"
               ? "you lose"
               : "tie"}
           </p>
@@ -97,16 +98,14 @@ function housePick(buttons: Buttons): ButtonObject {
   ];
 }
 
-function result(state: State): "user" | "house" | "tie" | void {
-  if (state.userPick && state.housePick) {
-    if (state.userPick.name === state.housePick.name) return "tie";
-    if (
-      (state.userPick.name === "paper" && state.housePick.name === "rock") ||
-      (state.userPick.name === "rock" && state.housePick.name === "scissors") ||
-      (state.userPick.name === "scissors" && state.housePick.name === "paper")
-    )
-      return "user";
+function result(user: ButtonObject, house: ButtonObject): Result {
+  if (user.name === house.name) return "tie";
+  if (
+    (user.name === "rock" && house.name === "scissors") ||
+    (user.name === "paper" && house.name === "rock") ||
+    (user.name === "scissors" && house.name === "paper")
+  )
+    return "user";
 
-    return "house";
-  }
+  return "house";
 }

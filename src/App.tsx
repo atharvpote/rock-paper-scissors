@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import GlobalContext, { ContextValue } from "./context/GlobalContext";
+import { useState } from "react";
 import Container from "./components/Container";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -37,16 +36,30 @@ export default function App(): JSX.Element {
     },
   };
 
-  const { state } = useContext(GlobalContext) as ContextValue;
+  const [currentPage, setCurrentPage] = useState<"start" | "result">("start");
+  const [userChip, setUserChip] = useState<ButtonObject | null>(null);
+  const [score, setScore] = useState<number>(0);
 
   return (
     <main>
-      <Header />
-      <Container>
-        {state.currentPage === "start" ? (
-          <Start buttons={buttons} />
+      <Header score={score} />
+      <Container currentPage={currentPage}>
+        {currentPage === "start" ? (
+          <Start
+            buttons={buttons}
+            setPage={setCurrentPage}
+            setUserPick={setUserChip}
+          />
         ) : (
-          <Result buttons={buttons} />
+          userChip && (
+            <Result
+              buttons={buttons}
+              userChip={userChip}
+              score={score}
+              setScore={setScore}
+              setPage={setCurrentPage}
+            />
+          )
         )}
       </Container>
       <Footer />

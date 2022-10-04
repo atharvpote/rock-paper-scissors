@@ -1,15 +1,17 @@
-import { useContext, useEffect, useState } from "react";
-import GlobalContext, { ContextValue } from "../context/GlobalContext";
+import { useEffect, useState } from "react";
 import { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 
 type ResultProps = {
   buttons: Buttons;
+  userChip: ButtonObject;
+  score: number;
+  setScore: React.Dispatch<number>;
+  setPage: React.Dispatch<"start" | "result">;
 };
 type Result = "user" | "house" | "tie";
 
 export default function Result(props: ResultProps): JSX.Element {
-  const { state, dispatch } = useContext(GlobalContext) as ContextValue;
   const [houseChip, setHouseChip] = useState<ButtonObject | null>(null);
   const [winner, setWinner] = useState<Result | null>(null);
 
@@ -18,13 +20,13 @@ export default function Result(props: ResultProps): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (state.userPick && houseChip)
-      setWinner(result(state.userPick, houseChip));
+    if (houseChip) setWinner(result(props.userChip, houseChip));
   }, [houseChip]);
 
   useEffect(() => {
-    if (winner === "user") dispatch({ type: "incrementScore" });
-    if (winner === "house") dispatch({ type: "decrementScore" });
+    if (winner === "user") props.setScore(props.score + 1);
+    if (winner === "house")
+      props.setScore(props.score <= 0 ? 0 : props.score - 1);
   }, [winner]);
 
   return (
@@ -37,10 +39,10 @@ export default function Result(props: ResultProps): JSX.Element {
             winner === "user" ? "winner-shadow" : ""
           }`}
         >
-          {state.userPick && (
+          {props.userChip && (
             <Button
-              icon={state.userPick.icon}
-              styles={state.userPick.styles}
+              icon={props.userChip.icon}
+              styles={props.userChip.styles}
               position=""
             />
           )}
@@ -82,7 +84,7 @@ export default function Result(props: ResultProps): JSX.Element {
         <button
           className="dark-text mx-auto block rounded-lg bg-white px-16 py-4 text-center uppercase tracking-widest md:py-3  md:px-10"
           onClick={(): void => {
-            dispatch({ type: "switchToStart" });
+            props.setPage("start");
           }}
         >
           play again

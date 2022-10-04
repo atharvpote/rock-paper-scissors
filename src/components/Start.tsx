@@ -1,18 +1,15 @@
-import { useContext } from "react";
-import GlobalContext, { ContextValue } from "../context/GlobalContext";
-import { Action } from "../context/reducer";
-import { Buttons } from "../App";
+import { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 import triangle from "../assets/bg-triangle.svg";
 
 type StartProps = {
   buttons: Buttons;
+  setPage: React.Dispatch<"start" | "result">;
+  setUserPick: React.Dispatch<ButtonObject | null>;
 };
 type Position = { [k: string]: string };
 
 export default function Start(props: StartProps): JSX.Element {
-  const { dispatch } = useContext(GlobalContext) as ContextValue;
-
   const position: Position = {
     paper: "absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2",
     scissors: "absolute top-0 right-0 translate-x-1/2 -translate-y-1/2",
@@ -22,7 +19,7 @@ export default function Start(props: StartProps): JSX.Element {
   return (
     <div className="relative w-40 md:w-60">
       <img src={triangle} alt="" />
-      {mapButtons(props.buttons, position, dispatch)}
+      {mapButtons(props.buttons, position, props.setPage, props.setUserPick)}
     </div>
   );
 }
@@ -30,7 +27,8 @@ export default function Start(props: StartProps): JSX.Element {
 function mapButtons(
   buttons: Buttons,
   position: Position,
-  dispatch: React.Dispatch<Action>
+  setPage: React.Dispatch<"start" | "result">,
+  userPick: React.Dispatch<ButtonObject | null>
 ): JSX.Element[] {
   const output: JSX.Element[] = [];
 
@@ -42,11 +40,8 @@ function mapButtons(
         styles={buttons[key].styles}
         position={position[key]}
         clickHandler={(): void => {
-          dispatch({ type: "switchToResult" });
-          dispatch({
-            type: "userPick",
-            payload: { value: buttons[key] },
-          });
+          setPage("result");
+          userPick(buttons[key]);
         }}
       />
     );

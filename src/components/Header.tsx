@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import GlobalContext, { ContextValue } from "../context/GlobalContext";
 import title from "../assets/logo.svg";
 
-export default function Header(): JSX.Element {
-  const { state } = useContext(GlobalContext) as ContextValue;
+type Props = {
+  score: number;
+};
 
+export default function Header(props: Props): JSX.Element {
   return (
     <div className="mx-auto max-w-3xl pt-8">
       <header className="mx-8 flex justify-between gap-4 rounded-lg border-4 border-white border-opacity-25 p-4 md:border-2">
@@ -16,7 +16,7 @@ export default function Header(): JSX.Element {
             score
           </h2>
           <span className="dark-text text-4xl font-bold md:text-5xl">
-            {state.score}
+            {props.score}
           </span>
         </div>
       </header>

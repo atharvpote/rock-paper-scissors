@@ -97,14 +97,6 @@ function getHousePick(buttons: Buttons): ButtonObject {
   ];
 }
 
-function getScore(result: Result, score: number): number {
-  if (result === "tie") return score;
-
-  if (result === "user") return score + 1;
-
-  return score <= 0 ? 0 : score - 1;
-}
-
 function result(user: ButtonObject, house: ButtonObject): Result {
   if (user.name === house.name) return "tie";
   if (
@@ -115,4 +107,12 @@ function result(user: ButtonObject, house: ButtonObject): Result {
     return "user";
 
   return "house";
+}
+
+function getScore(result: Result, score: number): number {
+  if (result === "tie") return score;
+
+  if (result === "user") return score + 1;
+
+  return score <= 0 ? 0 : score - 1;
 }

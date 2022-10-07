@@ -64,10 +64,4 @@
       @apply ml-2;
     }
   }
-
-  @media (height < 736px) and (width < 768px) {
-    .adjust-to-height {
-      margin-top: 5rem;
-    }
-  }
 }

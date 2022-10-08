@@ -71,7 +71,7 @@ export default function Result(props: ResultProps): JSX.Element {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
+            transition={{ delay: 1.75 }}
             className="text-center text-5xl uppercase md:text-4xl"
           >
             {winner === "user"
@@ -108,7 +108,7 @@ function ChipCover(props: ChipCoverProps): JSX.Element | null {
               }
             : {}
         }
-        transition={{ delay: 1.25 }}
+        transition={{ delay: 1.75 }}
         className="rounded-full"
       >
         {props.children}

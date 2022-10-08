@@ -72,7 +72,7 @@ export default function Result(props: ResultProps): JSX.Element {
         {/* when it's visible */}
         {/* <div className="md:0 basis-full md:order-2 md:basis-0 md:overflow-hidden"> */}
         <div className="mb-6">
-          <p className="text-center text-6xl uppercase md:text-4xl">
+          <p className="text-center text-5xl uppercase md:text-4xl">
             {winner === "user"
               ? "you won"
               : winner === "house"
@@ -82,7 +82,7 @@ export default function Result(props: ResultProps): JSX.Element {
         </div>
         <Link
           to="/"
-          className="dark-text mx-auto block rounded-lg bg-white px-16 py-4 text-center uppercase tracking-widest md:py-3  md:px-10"
+          className="dark-text mx-auto block w-56 rounded-lg bg-white py-4 text-center uppercase tracking-widest md:w-auto md:py-3 md:px-10"
         >
           play again
         </Link>

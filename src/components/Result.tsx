@@ -27,10 +27,11 @@ export default function Result(props: ResultProps): JSX.Element {
     else {
       const housePick = getHousePick(props.buttons);
       const winner = result(props.userChip, housePick);
+      const score = getScore(winner, props.score);
 
       setHouseChip(housePick);
       setWinner(winner);
-      props.setScore(getScore(winner, props.score));
+      props.setScore(score);
     }
   }, []);
 
@@ -39,7 +40,7 @@ export default function Result(props: ResultProps): JSX.Element {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:min-w-[40rem] md:items-center"
+      className="mb-8 mt-20 flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:mt-8 md:mb-12 md:min-w-[40rem] md:items-center"
     >
       {/* When play again is not visible */}
       {/* <div className="flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:min-w-[27rem] md:items-center"> */}
@@ -67,13 +68,18 @@ export default function Result(props: ResultProps): JSX.Element {
         {/* when it's visible */}
         {/* <div className="md:0 basis-full md:order-2 md:basis-0 md:overflow-hidden"> */}
         <div className="mb-6">
-          <p className="text-center text-5xl uppercase md:text-4xl">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="text-center text-5xl uppercase md:text-4xl"
+          >
             {winner === "user"
               ? "you won"
               : winner === "house"
               ? "you lose"
               : "tie"}
-          </p>
+          </motion.p>
         </div>
         <Link
           to="/"
@@ -88,24 +94,26 @@ export default function Result(props: ResultProps): JSX.Element {
 
 function ChipCover(props: ChipCoverProps): JSX.Element | null {
   return (
-    <motion.div
-      initial={{
-        boxShadow:
-          "0 0 0px 0rem rgba(255, 255, 255, 0.075), 0 0 0px 0rem rgba(255, 255, 255, 0.05), 0 0 0px 0rem rgba(255, 255, 255, 0.025)",
-      }}
-      animate={
-        props.shadow
-          ? {
-              boxShadow:
-                "0 0 0px 1rem rgba(255, 255, 255, 0.075), 0 0 0px 2.5rem rgba(255, 255, 255, 0.05), 0 0 0px 4.25rem rgba(255, 255, 255, 0.025)",
-            }
-          : {}
-      }
-      transition={{ delay: 1 }}
-      className="grid h-28 w-28 place-content-center rounded-full bg-[#192845] md:order-1 md:h-36 md:w-36"
-    >
-      {props.children}
-    </motion.div>
+    <div className="grid h-28 w-28 place-content-center rounded-full bg-[#192845] md:order-1 md:h-36 md:w-36">
+      <motion.div
+        initial={{
+          boxShadow:
+            "0 0 0px 0rem rgba(255, 255, 255, 0.075), 0 0 0px 0rem rgba(255, 255, 255, 0.05), 0 0 0px 0rem rgba(255, 255, 255, 0.025)",
+        }}
+        animate={
+          props.shadow
+            ? {
+                boxShadow:
+                  "0 0 0px 1rem rgba(255, 255, 255, 0.075), 0 0 0px 2.5rem rgba(255, 255, 255, 0.05), 0 0 0px 4.25rem rgba(255, 255, 255, 0.025)",
+              }
+            : {}
+        }
+        transition={{ delay: 1.25 }}
+        className="rounded-full"
+      >
+        {props.children}
+      </motion.div>
+    </div>
   );
 }
 

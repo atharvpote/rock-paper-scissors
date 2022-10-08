@@ -53,10 +53,18 @@
     box-shadow: 0 6px 0 0 #9a1736;
   }
 
-  .winner-shadow {
-    box-shadow: 0 0 0px 1rem rgba(255, 255, 255, 0.075),
-      0 0 0px 2.5rem rgba(255, 255, 255, 0.05),
-      0 0 0px 4.25rem rgba(255, 255, 255, 0.025);
+  .button-hover {
+    transition: scale 0.25s;
+  }
+
+  .button-hover:focus {
+    scale: 1.1;
+  }
+
+  @media (hover: hover) {
+    .button-hover:hover {
+      scale: 1.1;
+    }
   }
 
   @media (min-width: 300px) {

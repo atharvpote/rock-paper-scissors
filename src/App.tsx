@@ -46,7 +46,6 @@ export default function App(): JSX.Element | null {
   return (
     <main>
       <Header score={score} />
-
       <Container>
         <AnimatePresence mode="wait">
           {cloneElement(routes, { key: location.pathname })}

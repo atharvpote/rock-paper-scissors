@@ -4,17 +4,13 @@ import { motion } from "framer-motion";
 import { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 
+type Result = "user" | "house" | "tie";
+
 type ResultProps = {
   buttons: Buttons;
   userChip: ButtonObject | null;
   score: number;
   setScore: React.Dispatch<number>;
-};
-type Result = "user" | "house" | "tie";
-type ChipCoverProps = {
-  winner: Result | null;
-  shadow: boolean;
-  children: React.ReactNode;
 };
 
 export default function Result(props: ResultProps): JSX.Element {
@@ -32,6 +28,8 @@ export default function Result(props: ResultProps): JSX.Element {
       setHouseChip(housePick);
       setWinner(winner);
       props.setScore(score);
+
+      localStorage.setItem("score", score.toString());
     }
   }, []);
 
@@ -91,6 +89,12 @@ export default function Result(props: ResultProps): JSX.Element {
     </motion.div>
   );
 }
+
+type ChipCoverProps = {
+  winner: Result | null;
+  shadow: boolean;
+  children: React.ReactNode;
+};
 
 function ChipCover(props: ChipCoverProps): JSX.Element | null {
   return (

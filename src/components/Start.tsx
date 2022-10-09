@@ -3,12 +3,9 @@ import { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 import triangle from "../assets/bg-triangle.svg";
 
-export type StartProps = {
+type StartProps = {
   buttons: Buttons;
   setUserPick: React.Dispatch<ButtonObject | null>;
-};
-export type Positions = {
-  [k: string]: string;
 };
 
 export default function Start(props: StartProps): JSX.Element {
@@ -51,6 +48,10 @@ function mapButtons(
 
   return output;
 }
+
+type Positions = {
+  [k: string]: string;
+};
 
 const position: Positions = {
   paper: "top-0 left-0 -translate-y-1/2 -translate-x-1/2",

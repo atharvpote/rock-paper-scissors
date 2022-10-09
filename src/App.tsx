@@ -1,4 +1,4 @@
-import { useState, cloneElement } from "react";
+import { useState, cloneElement, useEffect } from "react";
 import { useRoutes, useLocation } from "react-router-dom";
 import Container from "./components/Container";
 import Footer from "./components/Footer";
@@ -14,9 +14,6 @@ export type ButtonObject = {
   name: "paper" | "scissors" | "rock";
   icon: string;
   styles: string;
-};
-export type Buttons = {
-  [key: string]: ButtonObject;
 };
 
 export default function App(): JSX.Element | null {
@@ -41,6 +38,12 @@ export default function App(): JSX.Element | null {
   ]);
   const location = useLocation();
 
+  useEffect(() => {
+    const score = localStorage.getItem("score");
+
+    if (score) setScore(Number.parseInt(score));
+  }, []);
+
   if (!routes) return null;
 
   return (
@@ -51,10 +54,14 @@ export default function App(): JSX.Element | null {
           {cloneElement(routes, { key: location.pathname })}
         </AnimatePresence>
       </Container>
-      <Footer />
+      <Footer setScore={setScore} />
     </main>
   );
 }
+
+export type Buttons = {
+  [key: string]: ButtonObject;
+};
 
 const buttons: Buttons = {
   paper: {

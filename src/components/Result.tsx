@@ -38,7 +38,7 @@ export default function Result(props: ResultProps): JSX.Element {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="mb-8 mt-20 flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:mt-8 md:mb-12 md:min-w-[40rem] md:items-center"
+      className="mt-20 mb-8 flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:mt-8 md:mb-24 md:min-w-[40rem] md:items-center"
     >
       {/* When play again is not visible */}
       {/* <div className="flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:min-w-[27rem] md:items-center"> */}

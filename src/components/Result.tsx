@@ -33,15 +33,19 @@ export default function Result(props: ResultProps): JSX.Element {
     }
   }, []);
 
+  const width = window.innerWidth;
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{
+        opacity: 0,
+        minWidth: width >= 768 ? "25rem" : "17rem",
+      }}
+      animate={{ opacity: 1, minWidth: width >= 768 ? "40rem" : "17rem" }}
       exit={{ opacity: 0 }}
-      className="mt-20 mb-8 flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:mt-8 md:mb-24 md:min-w-[40rem] md:items-center"
+      transition={{ minWidth: { delay: 1.5 } }}
+      className="mt-20 mb-8 flex max-w-xs flex-wrap justify-between gap-y-12 px-4 md:mt-8 md:mb-24 md:items-center"
     >
-      {/* When play again is not visible */}
-      {/* <div className="flex min-w-[17rem] max-w-xs flex-wrap justify-between gap-y-12 px-4 md:min-w-[27rem] md:items-center"> */}
       <div className="flex flex-col items-center gap-8 md:order-1">
         <ChipCover winner={winner} shadow={winner === "user"}>
           {props.userChip && (
@@ -62,16 +66,22 @@ export default function Result(props: ResultProps): JSX.Element {
           <p className="uppercase">the house picked</p>
         </div>
       </div>
-      <div className="basis-full md:order-2 md:basis-auto">
-        {/* when it's visible */}
-        {/* <div className="md:0 basis-full md:order-2 md:basis-0 md:overflow-hidden"> */}
+      <motion.div
+        initial={{
+          flexBasis: width >= 768 ? "0%" : "100%",
+          overflow: width >= 768 ? "hidden" : "visible",
+          opacity: 0,
+        }}
+        animate={{
+          flexBasis: width >= 768 ? "auto" : "100%",
+          overflow: "visible",
+          opacity: 1,
+        }}
+        transition={{ delay: 2 }}
+        className="basis-full md:order-2 md:basis-auto"
+      >
         <div className="mb-6">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.75 }}
-            className="text-center text-5xl uppercase md:text-4xl"
-          >
+          <motion.p className="text-center text-5xl uppercase md:text-4xl">
             {winner === "user"
               ? "you won"
               : winner === "house"
@@ -85,7 +95,7 @@ export default function Result(props: ResultProps): JSX.Element {
         >
           play again
         </Link>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
@@ -112,7 +122,7 @@ function ChipCover(props: ChipCoverProps): JSX.Element | null {
               }
             : {}
         }
-        transition={{ delay: 1.75 }}
+        transition={{ delay: 2 }}
         className="rounded-full"
       >
         {props.children}

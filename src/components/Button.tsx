@@ -33,6 +33,7 @@ export default function Button(props: ButtonProps): JSX.Element {
         <div className="shadow-top grid h-20 w-20 place-content-center rounded-full bg-white md:h-28 md:w-28">
           <img src={props.icon} alt="" className="w-9 md:w-12" />
         </div>
+        <span className="h-0 w-0 overflow-hidden">{props.key}</span>
       </motion.button>
     </div>
   );

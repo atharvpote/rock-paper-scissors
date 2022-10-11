@@ -13,6 +13,7 @@ export default function Header(props: Props): JSX.Element {
           <div className="title-margin ">
             <img src={title} alt="" />
           </div>
+          <h1 className="h-0 w-0 overflow-hidden">Rock,Paper,Scissors</h1>
         </Link>
         <div className="flex flex-col items-center justify-center rounded-md bg-white px-5 py-2 md:px-8">
           <h2 className="score-text text-xs uppercase tracking-widest">

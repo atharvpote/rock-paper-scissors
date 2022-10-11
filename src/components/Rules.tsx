@@ -29,7 +29,7 @@ export default function Rules(): JSX.Element {
               opacity: 0,
             }
           : {
-              top: "110%",
+              top: "100%",
             }
       }
       animate={
@@ -47,10 +47,10 @@ export default function Rules(): JSX.Element {
               opacity: 0,
             }
           : {
-              top: "110%",
+              top: "100%",
             }
       }
-      transition={{ type: "spring" }}
+      transition={{ type: "tween" }}
       className="fixed left-0 grid h-screen w-screen place-content-center bg-white md:top-0 md:bg-[rgba(0,0,0,0.5)]"
     >
       <div className="relative mx-auto w-4/5 md:w-96 md:rounded-md md:bg-white md:p-6">

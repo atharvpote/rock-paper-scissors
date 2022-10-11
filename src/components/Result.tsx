@@ -51,7 +51,7 @@ export default function Result(props: ResultProps): JSX.Element {
           {props.userChip && (
             <Button
               icon={props.userChip.icon}
-              key={props.userChip.name}
+              name={props.userChip.name}
               styles={props.userChip.styles}
             />
           )}
@@ -65,7 +65,7 @@ export default function Result(props: ResultProps): JSX.Element {
           {houseChip && (
             <Button
               icon={houseChip.icon}
-              key={houseChip.name}
+              name={houseChip.name}
               styles={houseChip.styles}
             />
           )}

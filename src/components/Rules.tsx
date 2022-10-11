@@ -29,7 +29,7 @@ export default function Rules(): JSX.Element {
               opacity: 0,
             }
           : {
-              top: "100%",
+              top: "110%",
             }
       }
       animate={
@@ -47,7 +47,7 @@ export default function Rules(): JSX.Element {
               opacity: 0,
             }
           : {
-              top: "100%",
+              top: "110%",
             }
       }
       transition={{ type: "spring" }}

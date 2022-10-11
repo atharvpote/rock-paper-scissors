@@ -34,7 +34,7 @@ function mapButtons(
       <AnimatePresence mode="wait" key={key}>
         {
           <Button
-            key={key}
+            name={key}
             icon={buttons[key].icon}
             styles={buttons[key].styles}
             position={position[key]}

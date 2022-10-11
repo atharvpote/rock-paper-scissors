@@ -30,9 +30,9 @@ export default function Button(props: ButtonProps): JSX.Element {
         tabIndex={props.position ? 0 : -1}
         aria-label={props.name}
       >
-        <div className="shadow-top grid h-20 w-20 place-content-center rounded-full bg-white md:h-28 md:w-28">
+        <span className="shadow-top grid h-20 w-20 place-content-center rounded-full bg-white md:h-28 md:w-28">
           <img src={props.icon} alt="" className="w-9 md:w-12" />
-        </div>
+        </span>
         <span className="h-0 w-0 overflow-hidden">{props.name}</span>
       </motion.button>
     </div>

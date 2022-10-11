@@ -61,9 +61,23 @@
     scale: 1.1;
   }
 
+  .footer-button {
+    transition: all 0.25s;
+  }
+
+  .footer-button:focus {
+    background-color: white;
+    @apply dark-text;
+  }
+
   @media (hover: hover) {
     .button-hover:hover {
       scale: 1.1;
+    }
+
+    .footer-button:hover {
+      background-color: white;
+      @apply dark-text;
     }
   }
 

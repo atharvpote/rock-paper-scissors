@@ -68,13 +68,14 @@ export default function Result(props: ResultProps): JSX.Element {
       </div>
       <motion.div
         initial={{
-          flexBasis: width >= 768 ? "0%" : "100%",
-          overflow: width >= 768 ? "hidden" : "visible",
+          ...(width >= 768 && {
+            flexBasis: "0%",
+            overflow: "hidden",
+          }),
           opacity: 0,
         }}
         animate={{
-          flexBasis: width >= 768 ? "auto" : "100%",
-          overflow: "visible",
+          ...(width >= 768 && { flexBasis: "auto", overflow: "visible" }),
           opacity: 1,
         }}
         transition={{ delay: 2 }}

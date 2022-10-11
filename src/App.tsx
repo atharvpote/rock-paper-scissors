@@ -9,6 +9,7 @@ import paper from "./assets/icon-paper.svg";
 import scissors from "./assets/icon-scissors.svg";
 import rock from "./assets/icon-rock.svg";
 import { AnimatePresence } from "framer-motion";
+import Rules from "./components/Rules";
 
 export type ButtonObject = {
   name: "paper" | "scissors" | "rock";
@@ -34,6 +35,10 @@ export default function App(): JSX.Element | null {
           setScore={setScore}
         />
       ),
+    },
+    {
+      path: "/rules",
+      element: <Rules />,
     },
   ]);
   const location = useLocation();

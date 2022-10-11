@@ -93,6 +93,7 @@ export default function Result(props: ResultProps): JSX.Element {
         <Link
           to="/"
           className="dark-text mx-auto block w-56 rounded-lg bg-white py-4 text-center uppercase tracking-widest md:w-auto md:py-3 md:px-10"
+          aria-label="play again"
         >
           play again
         </Link>

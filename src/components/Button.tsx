@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 type ButtonProps = {
+  key?: string;
   icon: string;
   styles: string;
   position?: string;
@@ -27,6 +28,7 @@ export default function Button(props: ButtonProps): JSX.Element {
           navigate("/result");
         }}
         tabIndex={props.position ? 0 : -1}
+        aria-label={props.key}
       >
         <div className="shadow-top grid h-20 w-20 place-content-center rounded-full bg-white md:h-28 md:w-28">
           <img src={props.icon} alt="" className="w-9 md:w-12" />

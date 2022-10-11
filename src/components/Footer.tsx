@@ -14,6 +14,7 @@ export default function Footer(props: FooterProps): JSX.Element {
             navigate("/rules");
           }}
           className="footer-button rounded-xl border-2 border-white border-opacity-50 px-8 py-2 text-lg uppercase tracking-widest text-white md:order-1"
+          aria-label="rules"
         >
           rules
         </button>
@@ -24,6 +25,7 @@ export default function Footer(props: FooterProps): JSX.Element {
             navigate("/", { replace: true });
           }}
           className="footer-button rounded-xl border-2 border-white border-opacity-50 px-8 py-2 text-lg uppercase tracking-widest text-white"
+          aria-label="reset"
         >
           reset
         </button>

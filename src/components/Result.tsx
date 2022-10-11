@@ -49,7 +49,11 @@ export default function Result(props: ResultProps): JSX.Element {
       <div className="flex flex-col items-center gap-8 md:order-1">
         <ChipCover winner={winner} shadow={winner === "user"}>
           {props.userChip && (
-            <Button icon={props.userChip.icon} styles={props.userChip.styles} />
+            <Button
+              icon={props.userChip.icon}
+              key={props.userChip.name}
+              styles={props.userChip.styles}
+            />
           )}
         </ChipCover>
         <div>
@@ -59,7 +63,11 @@ export default function Result(props: ResultProps): JSX.Element {
       <div className="flex flex-col items-center gap-8 md:order-3">
         <ChipCover winner={winner} shadow={winner === "house"}>
           {houseChip && (
-            <Button icon={houseChip.icon} styles={houseChip.styles} />
+            <Button
+              icon={houseChip.icon}
+              key={houseChip.name}
+              styles={houseChip.styles}
+            />
           )}
         </ChipCover>
         <div>

@@ -52,6 +52,9 @@ export default function Rules(): JSX.Element {
       }
       transition={{ type: "tween" }}
       className="fixed left-0 grid h-screen w-screen place-content-center bg-white md:top-0 md:bg-[rgba(0,0,0,0.5)]"
+      onClick={(): void => {
+        navigate("/");
+      }}
     >
       <div className="relative mx-auto w-4/5 md:w-96 md:rounded-md md:bg-white md:p-6">
         <header className="mb-16 items-center justify-between md:mb-8 md:flex">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ButtonObject, Buttons } from "../App";
+import type { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 
 type Result = "user" | "house" | "tie";

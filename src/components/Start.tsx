@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ButtonObject, Buttons } from "../App";
+import type { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 import triangle from "../assets/bg-triangle.svg";
 

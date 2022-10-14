@@ -1,5 +1,4 @@
-import { useState, cloneElement, useEffect } from "react";
-import { useRoutes, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Container from "./components/Container";
 import Footer from "./components/Footer";
@@ -20,28 +19,6 @@ export type ButtonObject = {
 export default function App(): JSX.Element | null {
   const [userChip, setUserChip] = useState<ButtonObject | null>(null);
   const [score, setScore] = useState<number>(0);
-  const routes = useRoutes([
-    {
-      path: "/",
-      element: <Start buttons={buttons} setUserPick={setUserChip} />,
-    },
-    {
-      path: "/result",
-      element: (
-        <Result
-          buttons={buttons}
-          userChip={userChip}
-          score={score}
-          setScore={setScore}
-        />
-      ),
-    },
-    {
-      path: "/rules",
-      element: <Rules />,
-    },
-  ]);
-  const location = useLocation();
 
   useEffect(() => {
     const score = localStorage.getItem("score");
@@ -49,17 +26,37 @@ export default function App(): JSX.Element | null {
     if (score) setScore(Number.parseInt(score));
   }, []);
 
-  if (!routes) return null;
+  const [rules, showRules] = useState<boolean>(false);
+  const [start, setStart] = useState<boolean>(true);
 
   return (
     <main>
       <Header score={score} />
       <Container>
         <AnimatePresence mode="wait">
-          {cloneElement(routes, { key: location.pathname })}
+          {start ? (
+            <Start
+              key={"start"}
+              buttons={buttons}
+              setUserPick={setUserChip}
+              setStart={setStart}
+            />
+          ) : (
+            <Result
+              key={"result"}
+              buttons={buttons}
+              userChip={userChip}
+              score={score}
+              setScore={setScore}
+              setStart={setStart}
+            />
+          )}
+        </AnimatePresence>
+        <AnimatePresence mode="wait">
+          {rules && <Rules key={"rules"} setShow={showRules} />}
         </AnimatePresence>
       </Container>
-      <Footer setScore={setScore} />
+      <Footer setScore={setScore} showRules={showRules} setStart={setStart} />
     </main>
   );
 }

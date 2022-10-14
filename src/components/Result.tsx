@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import type { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
@@ -11,16 +10,15 @@ type ResultProps = {
   userChip: ButtonObject | null;
   score: number;
   setScore: React.Dispatch<number>;
+  setStart: React.Dispatch<boolean>;
 };
 
 export default function Result(props: ResultProps): JSX.Element {
   const [houseChip, setHouseChip] = useState<ButtonObject | null>(null);
   const [winner, setWinner] = useState<Outcome | null>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!props.userChip) navigate("/", { replace: true });
-    else {
+    if (props.userChip) {
       const housePick = getHousePick(props.buttons);
       const winner = result(props.userChip, housePick);
       const score = getScore(winner, props.score);
@@ -94,13 +92,13 @@ export default function Result(props: ResultProps): JSX.Element {
             {winner && getPrompt(winner)}
           </motion.p>
         </div>
-        <Link
-          to="/"
+        <button
           className="dark-text mx-auto block w-56 rounded-lg bg-white py-4 text-center uppercase tracking-widest md:w-auto md:py-3 md:px-10"
           aria-label="play again"
+          onClick={(): void => props.setStart(true)}
         >
           play again
-        </Link>
+        </button>
       </motion.div>
     </motion.div>
   );

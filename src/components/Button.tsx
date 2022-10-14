@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 type ButtonProps = {
@@ -10,8 +9,6 @@ type ButtonProps = {
 };
 
 export default function Button(props: ButtonProps): JSX.Element {
-  const navigate = useNavigate();
-
   return (
     <div className={props.position ? `absolute ${props.position}` : "static"}>
       <motion.button
@@ -23,7 +20,6 @@ export default function Button(props: ButtonProps): JSX.Element {
         } ${props.styles}`}
         onClick={(): void => {
           if (props.clickHandler) props.clickHandler();
-          navigate("/result");
         }}
         tabIndex={props.position ? 0 : -1}
         aria-label={props.name}

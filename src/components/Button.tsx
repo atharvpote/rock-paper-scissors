@@ -13,9 +13,7 @@ export default function Button(props: ButtonProps): JSX.Element {
   const navigate = useNavigate();
 
   return (
-    <div
-      className={`${props.position ? `absolute ${props.position}` : "static"}`}
-    >
+    <div className={props.position ? `absolute ${props.position}` : "static"}>
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: [null, 1.1, 1] }}

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import type { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 
-type Result = "user" | "house" | "tie";
+type Outcome = "user" | "house" | "tie";
 
 type ResultProps = {
   buttons: Buttons;
@@ -15,7 +15,7 @@ type ResultProps = {
 
 export default function Result(props: ResultProps): JSX.Element {
   const [houseChip, setHouseChip] = useState<ButtonObject | null>(null);
-  const [winner, setWinner] = useState<Result | null>(null);
+  const [winner, setWinner] = useState<Outcome | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -91,11 +91,7 @@ export default function Result(props: ResultProps): JSX.Element {
       >
         <div className="mb-6">
           <motion.p className="text-center text-5xl uppercase md:text-4xl">
-            {winner === "user"
-              ? "you won"
-              : winner === "house"
-              ? "you lose"
-              : "tie"}
+            {winner && getPrompt(winner)}
           </motion.p>
         </div>
         <Link
@@ -111,7 +107,7 @@ export default function Result(props: ResultProps): JSX.Element {
 }
 
 type ChipCoverProps = {
-  winner: Result | null;
+  winner: Outcome | null;
   shadow: boolean;
   children: React.ReactNode;
 };
@@ -147,7 +143,7 @@ function getHousePick(buttons: Buttons): ButtonObject {
   ];
 }
 
-function result(user: ButtonObject, house: ButtonObject): Result {
+function result(user: ButtonObject, house: ButtonObject): Outcome {
   if (user.name === house.name) return "tie";
   if (
     (user.name === "rock" && house.name === "scissors") ||
@@ -159,10 +155,16 @@ function result(user: ButtonObject, house: ButtonObject): Result {
   return "house";
 }
 
-function getScore(result: Result, score: number): number {
+function getScore(result: Outcome, score: number): number {
   if (result === "tie") return score;
 
   if (result === "user") return score + 1;
 
   return score <= 0 ? 0 : score - 1;
+}
+
+function getPrompt(winner: Outcome): "you won" | "you lose" | "tie" {
+  if (winner === "user") return "you won";
+  else if (winner === "house") return "you lose";
+  else return "tie";
 }

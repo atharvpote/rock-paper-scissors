@@ -49,7 +49,6 @@ Users should be able to:
 - [Typescript](https://www.typescriptlang.org/) - JavaScript With Syntax For Types
 - [React](https://reactjs.org/) - JS Library
 - [Tailwind CSS](https://tailwindcss.com/) - CSS Framework
-- [React Router](https://reactrouter.com/) - Client Side Router
 - [Framer Motion](https://www.framer.com/motion/) - Animation Library
 - [Vite](https://vitejs.dev/) - Build Tool
 
@@ -69,7 +68,6 @@ I will Typescript for my future project unless it's a very small one. The develo
 - [Typescript Docs](https://www.typescriptlang.org/docs/)
 - [React Docs](https://reactjs.org/docs/getting-started.html)
 - [Tailwind Docs](https://tailwindcss.com/docs/)
-- [React Router Docs](https://reactrouter.com/en/main)
 - [Framer Motion Docs](https://www.framer.com/docs/)
 - [Vite Docs](https://vitejs.dev/guide/)
 

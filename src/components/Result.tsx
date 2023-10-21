@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import type { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 
 type Outcome = "user" | "house" | "tie";
 
-type ResultProps = {
+export default function Result(props: {
   buttons: Buttons;
   userChip: ButtonObject | null;
   score: number;
   setScore: React.Dispatch<number>;
   setStart: React.Dispatch<boolean>;
-};
-
-export default function Result(props: ResultProps): JSX.Element {
+}) {
   const [houseChip, setHouseChip] = useState<ButtonObject | null>(null);
   const [winner, setWinner] = useState<Outcome | null>(null);
 
@@ -95,7 +93,9 @@ export default function Result(props: ResultProps): JSX.Element {
         <button
           className="dark-text mx-auto block w-56 rounded-lg bg-white py-4 text-center uppercase tracking-widest md:w-auto md:py-3 md:px-10"
           aria-label="play again"
-          onClick={(): void => props.setStart(true)}
+          onClick={() => {
+            props.setStart(true);
+          }}
         >
           play again
         </button>
@@ -104,13 +104,12 @@ export default function Result(props: ResultProps): JSX.Element {
   );
 }
 
-type ChipCoverProps = {
-  winner: Outcome | null;
-  shadow: boolean;
-  children: React.ReactNode;
-};
-
-function ChipCover(props: ChipCoverProps): JSX.Element | null {
+function ChipCover(
+  props: PropsWithChildren<{
+    winner: Outcome | null;
+    shadow: boolean;
+  }>,
+) {
   return (
     <div className="grid h-28 w-28 place-content-center rounded-full bg-[#192845] md:order-1 md:h-36 md:w-36">
       <motion.div
@@ -135,13 +134,13 @@ function ChipCover(props: ChipCoverProps): JSX.Element | null {
   );
 }
 
-function getHousePick(buttons: Buttons): ButtonObject {
+function getHousePick(buttons: Buttons) {
   return Object.values(buttons)[
     Math.floor(Math.random() * Object.keys(buttons).length)
   ];
 }
 
-function result(user: ButtonObject, house: ButtonObject): Outcome {
+function result(user: ButtonObject, house: ButtonObject) {
   if (user.name === house.name) return "tie";
   if (
     (user.name === "rock" && house.name === "scissors") ||
@@ -153,7 +152,7 @@ function result(user: ButtonObject, house: ButtonObject): Outcome {
   return "house";
 }
 
-function getScore(result: Outcome, score: number): number {
+function getScore(result: Outcome, score: number) {
   if (result === "tie") return score;
 
   if (result === "user") return score + 1;
@@ -161,7 +160,7 @@ function getScore(result: Outcome, score: number): number {
   return score <= 0 ? 0 : score - 1;
 }
 
-function getPrompt(winner: Outcome): "you won" | "you lose" | "tie" {
+function getPrompt(winner: Outcome) {
   if (winner === "user") return "you won";
   else if (winner === "house") return "you lose";
   else return "tie";

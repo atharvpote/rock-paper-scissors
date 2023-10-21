@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 import rules from "../assets/image-rules.svg";
 import close from "../assets/icon-close.svg";
 
-type Props = {
+interface Props {
   setShow: React.Dispatch<boolean>;
-};
+}
 
-export default function Rules(props: Props): JSX.Element {
+export default function Rules(props: Props) {
   useEffect(() => {
-    function escFunction(e: KeyboardEvent): void {
+    function escFunction(e: KeyboardEvent) {
       if (e.key === "Escape") props.setShow(false);
     }
 
@@ -53,7 +53,9 @@ export default function Rules(props: Props): JSX.Element {
       }
       transition={{ type: "tween" }}
       className="fixed left-0 grid h-screen w-screen place-content-center bg-white md:top-0 md:bg-[rgba(0,0,0,0.5)]"
-      onClick={(): void => props.setShow(false)}
+      onClick={() => {
+        props.setShow(false);
+      }}
     >
       <div className="relative mx-auto w-4/5 md:w-96 md:rounded-md md:bg-white md:p-6">
         <header className="mb-16 items-center justify-between md:mb-8 md:flex">
@@ -62,7 +64,9 @@ export default function Rules(props: Props): JSX.Element {
           </h2>
           <button
             className="absolute bottom-0 left-1/2 block w-4 -translate-x-1/2 md:static md:translate-x-0"
-            onClick={(): void => props.setShow(false)}
+            onClick={() => {
+              props.setShow(false);
+            }}
           >
             <img src={close} alt="" />
           </button>

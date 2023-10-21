@@ -3,13 +3,13 @@ import type { ButtonObject, Buttons } from "../App";
 import Button from "./Button";
 import triangle from "../assets/bg-triangle.svg";
 
-type StartProps = {
+interface StartProps {
   buttons: Buttons;
   setUserPick: React.Dispatch<ButtonObject | null>;
   setStart: React.Dispatch<boolean>;
-};
+}
 
-export default function Start(props: StartProps): JSX.Element {
+export default function Start(props: StartProps) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -27,8 +27,8 @@ function mapButtons(
   buttons: Buttons,
   position: Positions,
   userPick: React.Dispatch<ButtonObject | null>,
-  setStart: React.Dispatch<boolean>
-): JSX.Element[] {
+  setStart: React.Dispatch<boolean>,
+) {
   const output: JSX.Element[] = [];
 
   for (const key in buttons)
@@ -39,19 +39,17 @@ function mapButtons(
         icon={buttons[key].icon}
         styles={buttons[key].styles}
         position={position[key]}
-        clickHandler={(): void => {
+        clickHandler={() => {
           userPick(buttons[key]);
           setStart(false);
         }}
-      />
+      />,
     );
 
   return output;
 }
 
-type Positions = {
-  [k: string]: string;
-};
+type Positions = Record<string, string>;
 
 const position: Positions = {
   paper: "top-0 left-0 -translate-y-1/2 -translate-x-1/2",

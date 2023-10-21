@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 
-type ButtonProps = {
+interface ButtonProps {
   name?: string;
   icon: string;
   styles: string;
   position?: string;
   clickHandler?: () => void;
-};
+}
 
-export default function Button(props: ButtonProps): JSX.Element {
+export default function Button(props: ButtonProps) {
   return (
     <div className={props.position ? `absolute ${props.position}` : "static"}>
       <motion.button
@@ -18,7 +18,7 @@ export default function Button(props: ButtonProps): JSX.Element {
         className={`grid place-content-center rounded-full border-[16px] md:border-[20px] ${
           props.position ? "button-hover cursor-pointer" : " cursor-default"
         } ${props.styles}`}
-        onClick={(): void => {
+        onClick={() => {
           if (props.clickHandler) props.clickHandler();
         }}
         tabIndex={props.position ? 0 : -1}

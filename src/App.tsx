@@ -10,13 +10,13 @@ import scissors from "./assets/icon-scissors.svg";
 import rock from "./assets/icon-rock.svg";
 import Rules from "./components/Rules";
 
-export type ButtonObject = {
+export interface ButtonObject {
   name: "paper" | "scissors" | "rock";
   icon: string;
   styles: string;
-};
+}
 
-export default function App(): JSX.Element | null {
+export default function App() {
   const [userChip, setUserChip] = useState<ButtonObject | null>(null);
   const [score, setScore] = useState<number>(0);
 
@@ -61,9 +61,7 @@ export default function App(): JSX.Element | null {
   );
 }
 
-export type Buttons = {
-  [key: string]: ButtonObject;
-};
+export type Buttons = Record<string, ButtonObject>;
 
 const buttons: Buttons = {
   paper: {

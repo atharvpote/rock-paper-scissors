@@ -3,8 +3,11 @@ import { createRoot } from "react-dom/client";
 
 import App from "./App";
 
-createRoot(document.getElementById("root") as HTMLElement).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+const root = document.getElementById("root");
+
+root &&
+  createRoot(root).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  );
